@@ -53,14 +53,16 @@ Enter your personal details and click on Register.
 Login using the registered user account from the login page.
 
 Once logged in you will be taken to the home page.
+
 ![alt text](C:\Users\tguru\Documents\Markdown\S6.jpg)
+
 Here you can see your user details.
 
 ## Step 7:
 
-Click on the configurations tab to update your ION API, HubSpot API and Infor M3 configurations.
+Click on the configurations tab to update your ION API, HubSpot API and Infor M3 configurations.  
 ![Step7](C:\Users\tguru\Documents\Markdown\S7.jpg)
-Fill up all the fields and click on Update.
+Fill up all the fields and click on Update.  
 That&#39;s all
 
 ## How to find ION API configurations?
@@ -69,7 +71,7 @@ That&#39;s all
 2. Navigate to Infor ION API section
 3. Navigate to **Authorized Apps** section from the left pane
 4. Locate the backend service if you have already created one. Otherwise you need to create a new one by clicking on the &quot;+&quot; symbol on the top of the page (you need to have security privileges to add an Authorized App in order to do this)
-  1. When creating a new service, you have to just provide a name and description for the service. It doesn&#39;t really matter what name and description you provide here.try
+      1. When creating a new service, you have to just provide a name and description for the service. It doesn&#39;t really matter what name and description you provide here.try
 5. Once you open the service details, click on the &quot;Download credentials&quot; button.
 6. Check the &quot;Create service account&quot; toggle
 7. Choose the M3 user with the permissions that you want to allow to the ION API service.
@@ -102,6 +104,6 @@ Login to your HubSpot portal. Click on the top right &quot;User Account&quot; ic
   - CRS610/Copy
   - CUSEXTMI/AddFieldValue
     - FILE - OCUSMA00
-    - PK01 - _\&lt;\&lt;M3 CUNO\&gt;\&gt;_
+    - PK01 - &lt;&lt;M3 CUNO&gt;&gt;
     - PK02 - hs\_companyid
-    - A030 - _\&lt;\&lt;hubspot company id\&gt;\&gt;_
+    - A030 - &lt;&lt;hubspot company id&gt;&gt;
