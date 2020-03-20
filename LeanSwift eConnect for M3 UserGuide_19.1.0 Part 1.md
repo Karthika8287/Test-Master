@@ -91,11 +91,11 @@ During setup, the Magento Admin panel is used to configure which transactions th
 
 ## Points of Contact
 
-This document and the software it describes are provided by LeanSwift Solutions Inc. For additional information regarding support, licensing, functionality etc. please contact LeanSwift Solutions Inc. via contact form at [http://www.leanswift.com](http://www.leanswift.com/)or email [info@leanswift.com](http://info@leanswift.com)
+This document and the software it describes are provided by LeanSwift Solutions Inc. For additional information regarding support, licensing, functionality etc. please contact LeanSwift Solutions Inc. via contact form at [http://www.leanswift.com](http://www.leanswift.com/) or email [info@leanswift.com](http://info@leanswift.com)
 
 ## Organization of the Manual
 
-This manual is not intended to cover any standard Magento functionality or user experience. The Magento user experience is customized and slightly different in each eCommerce implementation – though the general workflow issimilar.
+This manual is not intended to cover any standard Magento functionality or user experience. The Magento user experience is customized and slightly different in each eCommerce implementation – though the general workflow is similar.
 
 This manual describes the configuration of LeanSwift eConnect for Infor M3. For a detailed description of the standard transaction, please refer to Part II of the User Manual.
 
@@ -103,10 +103,10 @@ _Section 2_ includes the configuration required within LeanSwift eConnect Magent
 
 ## Acronyms and Abbreviations
 
-ERP – Enterprise Resource Planning 
-B2B – Business to Business
-B2C – Business to Consumer
-RMA – Return Materials Authorization
+ERP – Enterprise Resource Planning  
+B2B – Business to Business  
+B2C – Business to Consumer  
+RMA – Return Materials Authorization  
 
 ## CONFIGURATION
 
@@ -274,7 +274,7 @@ Following this, remember to save the configuration by pressing &#39;Save Config&
 
 ## Product Addition/ Synchronization
 
-There exists functionality to conveniently map your M3 items to your Magento webshop. _Leanswift &gt; econnect-ION &gt; Configuration &gt;Product Addition/Synchronization. In the current version, simple and configurable products are supported using this process, for all other product types, the default Magento process of importing via CSV is in place.
+There exists functionality to conveniently map your M3 items to your Magento webshop. Leanswift &gt; econnect-ION &gt; Configuration &gt;Product Addition/Synchronization. In the current version, simple and configurable products are supported using this process, for all other product types, the default Magento process of importing via CSV is in place.
 
 You can control the Product sync in website level by choosing Yes/No option in the Enable field. Each of the features, addition of new items, and syncing of existing can be controlled independently of each other.
 
@@ -371,3 +371,280 @@ When **Enable Registration** is set to &#39;Yes&#39;, this indicates that as new
 A manual process is assumed within M3, where a Customer service/Accounting responsible would review these preliminary customers (credit checks etc.) – and if they are approved as a new customer the status in M3 is manually changed to active (20). While the customer status in M3 is preliminary (10), the customer in question can&#39;t place an order within Magento (eConnect performs a real-time check against M3 during the checkout process to validate the customer status). Products can be added to cart and the cart saved, but the checkout process can&#39;t be completed.
 
 Setting **Enable Registration** to &#39;No&#39; disables the registration feature completely, which then in turn enables the Create New Customer parameter:
+
+**Create New Customer**
+
+This parameter is intended to be used for B2C sites where a choice needs to be made whether individual customers should exist in M3 for each consumer, or if a single &quot;common&quot; customer should be used for all consumer order received from Magento.
+
+If **Create New Customer** is set to &#39;Yes&#39;, the customer number specified in **Customer Template ID** will be used to create a new customer number within M3 for each order being placed. If a registered user is signed in, and as such already has a Magento customer# - a verification is always first performed to see whether there&#39;s a value on External Customer # or not. If there is – no new customer# will be created in M3.
+
+If **Create New Customer** is set to &#39;No&#39;, then the same Customer# is used for each order  created within M3. This customer number is then defined in the **Common CustomerID** field.
+
+
+
+## Customer Addition/ Synchronization
+
+Customer Addition/Synchronization contains all settings related to fetching Customers from M3 and synchronizing Customer data. In this version, the following limitations apply:
+
+Addition:
+
+- Fetches all customers irrespective of active/inactive (status)
+- Fetches customers with a default email address
+
+Synchronization:
+
+- Sync only applies to existing customers
+- Customer master and Financial Data is synchronized.
+- Address data issynchronized
+
+
+**Enable**
+
+This setting provides the option to enable/disable the Customer Addition/Sync on website level.
+
+**Enable Customer sync**
+
+This setting provides the option to enable/disable the Customer Sync on website level.
+
+**Enable Customer Addition**
+
+This setting provides the option to enable/disable the Customer Addition on website level.
+
+**Customer Group Id**
+
+This setting provides the option to choose the group from which customers from M3 needs to be imported.
+
+**New Account Email Notification**
+
+This field sends a mail confirmation to the newly added customer when set to yes.  The mail will have a &#39;Confirm Account&#39; option. When clicked on that, user will get redirected to frontend page
+
+**Customer Master Mapping**
+
+This section allows for mapping of additional Customer related fields within Magento to Customer master fields in M3. The mapping works exactly the same way as for the previous two sections. Customer&#39;s Order type, Facility and Division can also be synchronized. When a customer has this data synchronized, this detail gets picked over the basic data while order is getting placed
+
+**Customer Address Mapping**
+
+This section controls how the Billing and Shipping Address for the customer in Magento is to be created based on the address details in M3.
+
+The mapping is done in the same way as for Shipping methods and Product Sync for example. The Magento address attribute to map is selected from the drop-down list in the &#39;Magento Attribute&#39; column. The M3 attribute this should be mapped to is then selected from the drop- down list in the &#39;M3 Attribute&#39; column.
+
+
+
+## Sales
+
+The &#39;Sales&#39; section contains three key settings related to the sales order process from Magento to M3.
+
+
+
+
+
+**Enable order comments**
+
+If set to &#39;Yes&#39;, this enables sending header-level comments [entered in the last step of the Checkout process] for the entire order to M3.
+
+**Allow Item Price**
+
+If set to &#39;Yes&#39;, this enables sending Price for the order to M3.
+
+**Send confirmation when external order placed**
+
+Controls whether a separate e-mail confirmation should be sent following the order being successfully added in M3.
+
+**Capture Payment Online**
+
+This option set to &#39;Yes&#39; will during Invoice creation in Magento [as part of the synchronization when the invoice details from M3 are used to create the Magento invoice] also invoke the &#39;Capture&#39; transaction from Magento for credit card orders. If this option is set to &#39;No&#39;, it&#39;s assumed that capture of funds via whatever payment gateway is used within Magento is handled manually via a separate process.
+
+
+
+## Order Charges
+
+The **Order Charges** group contains the settings related to how various additional charges within Magento, such as Tax- &amp; Shipping (freight) should be handled by eConnect.
+
+**Tax Transfer &amp; Tax Charge code:** If Tax Transfer is set to &#39;No&#39;, then dynamically the Tax Chargefield is not displayed as it doesn&#39;t apply:
+
+
+
+When **Tax Transfer** is set to &#39;Yes&#39;, the **Tax Charge** field is visible:
+
+
+The drop-down for Tax Charge code provides dynamic values from M3 to enable an easy selection and reduce the risk for erroneous entry:
+
+
+
+**Shipping/Freight Fee Charge Type**
+
+This setting provides the option to determine whether to in M3 handle the Shipping fee from Magento as a Non-stock item or an order header charge.
+
+There exists an option to enable/disable, with which one can control whether to send the shipping charge to M3 or not
+
+
+
+The parameter offers the user a simple selection between the two options:
+
+
+
+
+
+Depending on the selection, the following setting is dynamically adjusted. When &#39;Non-stock item&#39; is selected as in the screen shot above, the user can select Shipping/Freight Fee Item Number in the field below. The selection is also here dynamic against M3 so that it provides the user with a simple drop-down of applicable items from M3.
+
+If &#39;Charges&#39; is selected, the following field provides selection of &#39;Shipping/Freight Fee Charge Code&#39;, and also in this case the list of available Charge ID&#39;s is dynamically retrieved from M3:
+
+
+
+
+
+
+
+**Gift Wrap Transfer**
+
+The **Gift Wrap** Transfer parameter controls whether or not to transfer Gift Wrapping related information from Magento. This information includes:
+
+- Order level gift wrapping (Cost &amp;Description)
+- Line level gift wrapping (Cost &amp;Description)
+- Gift messages (Order &amp; Linelevel)
+- Printed Gift message cardcost
+
+If **Gift Wrap Transfer** is set to &#39;No&#39; – no information related to Gift Wrapping will be transferred from Magento to M3.
+
+If **Gift Wrap Transfer** is set to &#39;Yes&#39; – all of the above-mentioned information can be transferred (depending on what&#39;s been configured and is in use within Magento).
+
+Setting the parameter to &#39;Yes&#39;, will also in this case dynamically open up a number of additional fields on the screen:
+
+
+
+
+
+The **Gift Wrap Charge Type** parameter controls whether the Gift Wrapping related costs in Magento should be transferred over to M3 as Charges (Order- and/or Line) or Non-stock items.
+
+As in the previous screen shot – if **Gift Wrap Charge Type** is set to &#39;Non-stock items&#39; – the user is presented with selecting a non-stock item to use for (i) Order level gift wrapping charges and (ii) Line level gift wrapping charges. These two non-stock items don&#39;t have to be different – they can both use the same M3 non-stock item value.
+
+If instead the **Gift Wrap Charge Type** parameter is set to &#39;Charges&#39; – the following two parameters are dynamically adjusted to **Gift Wrap Order Charge Code** &amp; **Gift Wrap Line Charge Code** , offering a selection of Order-level and Line-level charge codes in M3 to handle Order-level Gift wrapping costs and Line-level Gift Wrapping costs.
+
+
+
+## Payments
+
+The Payments group contains the configuration related to credit-card integration, payment terms &amp; methods mapping, invoice fees etc.
+
+
+
+**Re-authorization Amount (Credit Cards)**
+
+Single-authorization is used by eConnect, i.e. the credit card authorization created by Magento is transferred over to M3 without the need to re-authorize. This parameter will be removed.
+
+**Payment Provider**
+
+The mapping within this setup provides the link between Magento Payment Method values and Payment Terms &amp; Payment Method values in M3. In the case of the mapping for the Credit Card Payment Method, the &#39;M3 Credit Card Provider&#39; value also provides direct input to the ordercreationprocess.
+
+**Invoice Fee Charge Type**
+
+Invoice fees that can be imposed by certain payment providers can via this setting be handled two different ways in M3 – either as a non-stock item or as a [order header] charge.
+
+
+
+
+
+
+
+The selection made on this parameter will control which of the two values &#39;Invoice Fee Charge Code&#39; or &#39;Invoice Fee Charge Item no&#39; in the mapping below that will be used
+
+
+
+**Invoice Fees**
+
+This section is used if any Payment provider imposes some kind of transaction fee that needs to be represented on the order in M3. One example of this is the Swedish payment provider Klarna, that imposes a fee of about 25 SEK on each purchase when their service is used.
+
+The fee corresponding to the value entered in the &#39;Invoice Fee Amount&#39; column is added to the order either as a header charge or as a non-stock item depending on the previous settings.
+
+In the example here, a fee of $2.00 would be added to each order as a non-stock item when the Credit Card payment option is used.
+
+
+
+## Price Synchronization
+
+The Price Synchronization settings have been added to provide an option to enable or disable the real-time customer/item specific price call, as well as provide an option to increase site performance when needed.
+
+
+
+
+
+**Enable**
+
+Setting this parameter to &#39;Yes&#39; enables the Customer special price to be updated in magento when there is a change in M3 price table. Setting to No will not update any changes in magento.
+
+When his setting is turned On, Customer special price is displayed in frontend when customer places the order.
+
+**Enable in Admin**
+
+Setting this parameter to &#39;Yes&#39; enables the Customer special price to be updated in magento when there is a change in M3 price table. Setting to No will not update any changes in magento.
+
+When his setting is turned On, Customer special price is displayed in backend when customer places the order.
+
+## Inventory Synchronization
+
+This setting provides an option for which stock to invoke when stock is updated in M3.
+
+
+
+**ERP Inventory Attribute**
+
+Allows admin to choose between On-Hand/Available Inventory/Allocatable Net.
+
+
+
+
+
+
+
+
+
+## Initial Load/ Import
+
+This feature enables to import the data from M3.
+
+
+
+Each of this section has a set of fields that allows to choose date range and conditions for the data to be imported.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## BOD Mapping
+
+
+
+## Cron Settings
+
+This section contains the basic setup for how often the LeanSwift specific background (cron) jobs should run. The actual configuration of the job in the screen shot below is not representative of a normal customer installation.
+
+The setup will vary from customer to customer depending on a number of factors such as basic data volumes, ordering processes etc.
+
+This section should always be reviewed within the project, and with the help of the LeanSwift Services team be adjusted to best fit each customer&#39;s environment.
+
+
+
+## Version Info
+
+This last section provides information related to the version of the LeanSwift Magento extension that&#39;s installed.
+
+
+
+
+## MAGENTO STANDARD FUNCTIONALITY
+
+The ERP connector does not override or impact any other functionality in Magento. Configure Magento using the Magento admin panel as required.
+
+## Exit System
+
+Log out from Magento admin using the link at the top right.
